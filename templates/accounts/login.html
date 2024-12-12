@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<div class="page-section">
+    <div class="container">
+        <h1 class="text-center wow fadeInUp">CS Hospital Login Page</h1>
+
+        <form class="contact-form mt-5 w-50" method="POST">
+            {%csrf_token%}
+            {%include 'messages/messages.html'%}
+            <div class="row mb-3">
+                <div class="col-12 py-2 wow fadeInUp">
+                    <label for="username">Your Role</label><br>
+                    {{roleform.role}}
+                </div>
+                <div class="col-12 py-2 wow fadeInUp">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username.."
+                        required>
+                </div>
+                <div class="col-12 py-2 wow fadeInUp">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control"
+                        placeholder="Enter Password.." required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary wow zoomIn w-100">Login</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

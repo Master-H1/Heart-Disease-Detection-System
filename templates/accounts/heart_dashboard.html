@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+{%extends 'base.html'%} {%load static%} {%block content%}
+<section class="section-conten padding-y mt-3 mb-3">
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-md-3 col-lg-3">
+        <!--   SIDEBAR   1-->
+        <ul class="list-group dash_opt">
+          <a
+            class="list-group-item active text-center"
+            href="{%url 'dashboard'%}"
+          >
+            MY PROFILE</a
+          >
+          <a
+            class="list-group-item text-center btn-primary border"
+            href="{%url 'finalresults'%}"
+          >
+            FINAL TEST RESULT RECORDS</a
+          >
+          <a
+            class="list-group-item text-center btn-primary border"
+            href="{%url 'fromconsult'%}"
+          >
+            PATIENT RECORDS FROM CONSULT</a
+          >
+          <a
+            class="list-group-item text-center btn-primary border"
+            href="{%url 'viewheartlab'%}"
+          >
+            PATIENT RECORDS SENT TO LAB
+          </a>
+        </ul>
+        <br />
+        <a
+          class="btn btn-danger btn-block mb-3"
+          href="{%url 'logout'%}"
+          onclick="return confirm('Are you sure you want to Logout?')"
+        >
+          <i class="fa fa-power-off"></i> <span class="text">Logout</span>
+        </a>
+        <!--   SIDEBAR .//END   -->
+      </aside>
+      <main class="col-md-9">
+        {%include 'messages/messages.html'%}
+        <!-- ======= PAGE PART 1 PROFILE -->
+        {%if page1 == 'heartdash1'%}
+        <article class="card">
+          <header class="card-header">
+            <strong class="d-inline-block mr-3"
+              >WELCOME TO HEART DISEASE TREATMENT DEPARTMENT DASHBOARD</strong
+            >
+          </header>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <h6 class="text-muted">Remember the aim of Our Hospital</h6>
+                <br />
+                <p>
+                  Deliver a good Services..! <br />
+                  We know that a patient is our best client, <br />
+                  The better we treat them with good care,<br />
+                  This wil raise the strength of our hospital.<br />
+                  Together we can make it..!
+                </p>
+                <div style="margin-top: 6rem;">
+                  <a
+                    href="http://localhost:8501/"
+                    target="_blank"
+                    class="btn btn-lg btn-primary"
+                    >Generate a Report</a
+                  >
+                </div>
+              </div>
+              <div class="col-md-4 bg-primary">
+                <h6 class="text-muted text-center pt-2">MY PROFILE</h6>
+                <ul class="list-group mb-3">
+                  <li class="list-group-item">
+                    {%if user.photo%}
+                    <img
+                      src="{{user.photo.url}}"
+                      style="max-width: 400px; height: 300px"
+                      class="rounded-circle img-thumbnail mx-auto d-block my-3"
+                      alt="profile photo"
+                    />
+                    {%else%}
+                    <img
+                      src="{%static 'img/person/avatar.png'%}"
+                      style="max-width: 150px; height: 150px"
+                      class="rounded-circle img-thumbnail mx-auto d-block my-3 text-center"
+                    />
+                    {%endif%}
+                  </li>
+                  <li class="list-group-item text-center">
+                    {{user.user.first_name}}
+                  </li>
+                  <li class="list-group-item text-center">
+                    {{user.user.last_name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- row.// -->
+          </div>
+          <!-- card-body .// -->
+        </article>
+        <!-- order-group.// -->
+        <!-- ========== PAGE PART 1 END -->
+
+        <!-- ==== PAGE PART 2 FINAL RESULTS -->
+        {%elif page2 == 'heartdash2'%}
+        <div class="container-fluid tab">
+          <div
+            class="page-banner overlay-dark bg-image"
+            style="background-image: url(../static/img/bg_image_1.jpg)"
+          >
+            <div class="banner-section">
+              <div class="container-fluid text-center wow fadeInUp">
+                <h1 class="font-weight-normal">
+                  FINAL HEART DISEASE DETECTION RESULTS
+                </h1>
+              </div>
+              <!-- .container -->
+            </div>
+            <!-- .banner-section -->
+          </div>
+          <!-- .page-banner -->
+          <div
+            class="row p-0 pb-0 pe-lg-0 pt-lg-0 align-items-center rounded-0 border shadow-lg text-center"
+          >
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-sm">
+                <thead>
+                  <tr class="bg-success text-light">
+                    <th scope="col">EXAM ID</th>
+                    <th scope="col">PATIENT ID</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">AGE</th>
+                    <th scope="col">SEX</th>
+                    <th scope="col">ChestPainType</th>
+                    <th scope="col">RestingBP</th>
+                    <th scope="col">Cholesterol</th>
+                    <th scope="col">FastingBS</th>
+                    <th scope="col">RestingeCG</th>
+                    <th scope="col">MaxHR</th>
+                    <th scope="col">ExerciseAngina</th>
+                    <th scope="col">Oldpeak</th>
+                    <th scope="col">ST_Slope</th>
+                    <th scope="col">DATE OF EXAM</th>
+                    <th scope="col">HeartDisease</th>
+                    <th scope="col" colspan="2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for exam in examresult%}
+                  <tr>
+                    <td>{{exam.id}}</td>
+                    <td>{{exam.patient.id}}</td>
+                    <td>{{exam.patient.first_name}}</td>
+                    <td>{{exam.patient.last_name}}</td>
+                    <td>{{exam.age}}</td>
+                    <td>{{exam.sex}}</td>
+                    <td>{{exam.chestpaintype}}</td>
+                    <td>{{exam.restingbp}}</td>
+                    <td>{{exam.cholesterol}}</td>
+                    <td>{{exam.fastingbs}}</td>
+                    <td>{{exam.restingecg}}</td>
+                    <td>{{exam.maxhr}}</td>
+                    <td>{{exam.exerciseangina}}</td>
+                    <td>{{exam.oldpeak}}</td>
+                    <td>{{exam.st_slope}}</td>
+                    <td>{{exam.date_recorded}}</td>
+                    <!-- Below display Text if Heart column is None else actual value -->
+                    {%if exam.heartdisease != None%}
+                    <td>{{exam.heartdisease}}</td>
+                    {%else%}
+                    <td>Not Predicted</td>
+                    {%endif%}
+                    <!-- end -->
+                    <!-- Below is for action to take -->
+                    {%if exam.heartdisease == None%}
+                    <td>
+                      <a
+                        href="{%url 'heartpredict' exam.id%}"
+                        class="btn btn-sm btn-primary"
+                        >Predict</a
+                      >
+                    </td>
+                    {%endif%} {%if exam.heartdisease != None%}
+                    <td>
+                      <a
+                        href="{%url 'print_result' exam.id%}"
+                        class="btn btn-sm btn-danger"
+                        >Print Result</a
+                      >
+                    </td>
+                    {%endif%}
+                  </tr>
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- =====  PAGE PART 2 END =======-->
+
+        <!-- ====== PAGE PART 3 VIEW PATIENT RECORD RECEIVED FROM CONSULTATION DEPARTMENT=========== -->
+        {%elif page3 == 'heartdash3'%}
+        <div
+          class="page-banner overlay-dark bg-image bg-info"
+          style="background-image: url(../static/img/bg_image_1.jpg)"
+        >
+          <div class="banner-section">
+            <div class="container-fluid text-center wow fadeInUp">
+              <h1 class="font-weight-normal">
+                LIST OF PATIENT RECORDS RECEIVED FROM CONSULTATION DEPARTMENT
+              </h1>
+            </div>
+            <!-- .container -->
+          </div>
+          <!-- .banner-section -->
+        </div>
+        <!-- .page-banner -->
+        <div class="container-fluid my-3 tab" style="overflow: auto">
+          <div
+            class="row p-0 pb-0 pe-lg-0 pt-lg-0 align-items-center rounded-0 border shadow-lg text-center"
+          >
+            {%if patientrec%}
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr class="bg-success text-light">
+                    <th scope="col">PATIENT ID</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">DISEASE TO TEST</th>
+                    <th scope="col">DATE SENT</th>
+                    <th scope="col" colspan="2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for record in patientrec%}
+                  <tr>
+                    <td>{{record.patient.id}}</td>
+                    <td>{{record.patient.first_name}}</td>
+                    <td>{{record.patient.last_name}}</td>
+                    <td>{{record.patient.disease.name}}</td>
+                    <td>{{record.date}}</td>
+                    <td>
+                      <a href="{%url 'heartlab' record.id%}">SEND TO LAB</a>
+                      <a
+                        onclick="return confirm('Are you sure you want to delete this Record?')"
+                        href="{%url 'heartdelrecord' record.id%}"
+                        class="text-danger"
+                        >Delete</a
+                      >
+                    </td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+            {%else%}
+            <h1>No Patient Records Received from Consult Department..!</h1>
+            {%endif%}
+          </div>
+        </div>
+        <!-- ====== PAGE PART 3 END=========== -->
+
+        <!-- ====== PAGE PART 4 VIEW PATIENT RECORD SENT TO LABORATORY TEST=========== -->
+        {%elif page4 == 'heartdash4'%}
+        <div
+          class="page-banner overlay-dark bg-image bg-warning"
+          style="background-image: url(../static/img/bg_image_1.jpg)"
+        >
+          <div class="banner-section">
+            <div class="container-fluid text-center wow fadeInUp">
+              <h1 class="font-weight-normal">
+                LIST OF PATIENT RECORDS SENT TO LABORATORY TEST
+              </h1>
+            </div>
+            <!-- .container -->
+          </div>
+          <!-- .banner-section -->
+        </div>
+        <!-- .page-banner -->
+        <div class="container-fluid my-3 tab">
+          <div
+            class="row p-0 pb-0 pe-lg-0 pt-lg-0 align-items-center rounded-0 border shadow-lg text-center"
+          >
+            {%if patientrectest%}
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr class="bg-success text-light">
+                    <th scope="col">PATIENT ID</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">DISEASE TO TEST</th>
+                    <th scope="col">DATE SENT</th>
+                    <th scope="col" colspan="2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for record in patientrectest%}
+                  <tr>
+                    <td>{{record.patient.id}}</td>
+                    <td>{{record.patient.first_name}}</td>
+                    <td>{{record.patient.last_name}}</td>
+                    <td>{{record.patient.disease.name}}</td>
+                    <td>{{record.date}}</td>
+                    <td><a href="#" class="text-danger">Delete</a></td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+            {%else%}
+            <h1>No Patient Records Sent to Laboratory Test..!</h1>
+            {%endif%}
+          </div>
+        </div>
+        <!-- ====== PAGE PART 4 END=========== -->
+
+        <!-- PAGE PART 5 PREDICTING PATIENT HEART DISEASE RESULT-->
+        {%elif page5 == 'heartdash5'%}
+        <div
+          class="page-section bg-grey text-light"
+          style="
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(250, 107, 59, 0.26);
+          "
+        >
+          <h1 class="text-center wow fadeInUp text-dark">
+            PATIENT HEART DISEASE PREDICTION RESULT
+          </h1>
+          <div class="container">
+            <form method="POST">
+              {%csrf_token%}
+              <div class="row mt-5">
+                <div class="col-12 col-sm-2 py-2 wow fadeInLeft">
+                  <label>PATIENT ID:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.patient.id}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-3 py-2 wow fadeInRight">
+                  <label>FIRST NAME:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.patient.first_name}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-3 py-2 wow fadeInRight">
+                  <label>LAST NAME:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.patient.last_name}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>AGE:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.age}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-1 py-2 wow fadeInRight">
+                  <label>SEX:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.patient.sex}}"
+                    disabled
+                  />
+                </div>
+                <!-- Exam results -->
+                <!-- ROW 1 -->
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>ChestPainType:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.chestpaintype}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>RestingBP:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.restingbp}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>Cholesterol:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.cholesterol}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>FastingBS:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.fastingbs}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-3 py-2 wow fadeInRight">
+                  <label>RestingeCG:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.restingecg}}"
+                    disabled
+                  />
+                </div>
+                <!-- ROW 2 -->
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>Maxhr:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.maxhr}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>ExerciseAngina:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.exerciseangina}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>Oldpeak:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.oldpeak}}"
+                    disabled
+                  />
+                </div>
+                <div class="col-12 col-sm-2 py-2 wow fadeInRight">
+                  <label>ST_Slope:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{patient_data.st_slope}}"
+                    disabled
+                  />
+                </div>
+                <!-- Row 3 -->
+                <div class="row col-12 mt-5 text-dark">
+                  <div
+                    class="col-12 col-sm-6 p-2 wow fadeInRight bg-success text-center border"
+                  >
+                    {%if result == 0%}
+                    <h1>Prediction Result =&nbsp;&nbsp;<i>{{result}}</i></h1>
+                    <h3>
+                      <img
+                        src="{%static 'img/correct_icon.jpg'%}"
+                        width="40"
+                        height="40"
+                        alt=""
+                      />
+                    </h3>
+                    <h3 class="text-success"><i>No Disease</i></h3>
+                    {%else%}
+                    <h1>Prediction Result = &nbsp;&nbsp;<i>{{result}}</i></h1>
+                    <h3>
+                      <img
+                        src="{%static 'img/warning_icon.png'%}"
+                        width="40"
+                        height="40"
+                        alt=""
+                      />
+                    </h3>
+                    <h3 class="text-warning"><i>Has Heart Disease</i></h3>
+
+                    {%endif%}
+                  </div>
+                  <div
+                    class="col-12 col-sm-6 p-2 wow fadeInRight bg-info text-center border"
+                  >
+                    <h1>Predict Probability:</h1>
+                    <h3>
+                      <i>
+                        <h2>Prob of having no Disease = {{prob_no_disease}}</h2>
+                        <h2>
+                          Prob of having Heart Disease = {{prob_has_disease}}
+                        </h2>
+                      </i>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <a
+                  href="{%url 'finalresults'%}"
+                  class="btn btn-primary mt-3 wow zoomIn"
+                  >View The Results</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- PAGE PART 4 END -->
+        {%endif%}
+      </main>
+
+      <!-- settings -->
+      <!-- profile settings end -->
+    </div>
+    <!-- row.// -->
+  </div>
+</section>
+{%endblock%}

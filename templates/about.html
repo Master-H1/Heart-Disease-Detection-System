@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="page-banner overlay-dark bg-image" style="background-image: url(../static/img/bg_image_1.jpg);">
+  <div class="banner-section">
+    <div class="container text-center wow fadeInUp">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0 mb-2">
+          <li class="breadcrumb-item"><a href="{%url 'home'%}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">About</li>
+        </ol>
+      </nav>
+      <h1 class="font-weight-normal">About Us</h1>
+    </div> <!-- .container -->
+  </div> <!-- .banner-section -->
+</div> <!-- .page-banner -->
+
+<div class="page-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 py-3 wow zoomIn">
+        <div class="card-service">
+          <div class="circle-shape bg-secondary text-white">
+            <span class="mai-chatbubbles-outline"></span>
+          </div>
+          <p><span>Chat</span> with a doctors</p>
+        </div>
+      </div>
+      <div class="col-md-4 py-3 wow zoomIn">
+        <div class="card-service">
+          <div class="circle-shape bg-primary text-white">
+            <span class="mai-shield-checkmark"></span>
+          </div>
+          <p><span>Faster</span>-Heart Disease Detection</p>
+        </div>
+      </div>
+      <div class="col-md-4 py-3 wow zoomIn">
+        <div class="card-service">
+          <div class="circle-shape bg-accent text-white">
+            <span class="mai-basket"></span>
+          </div>
+          <p><span>UR</span>-Hospital Laboratory</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 wow fadeInUp">
+        <h1 class="mb-3">Welcome to CS Hospital Platform</h1>
+        <div class="text-lg">
+          <p>In Rwanda, Cardiovascular diseases (CVDs) are the third leading cause of death(Including Heart
+            Diseases),and are the number 1 cause
+            of death globally, taking an estimated 17.9 million lives each year, which accounts for 31% of all deaths
+            worldwide. Four out of 5CVD deaths are due to heart attacks and strokes, and one-third of these deaths occur
+            prematurely in people under 70 years of age. Heart failure is a common event caused by CVDs.</p>
+
+          <p>We beleive that the Early detection with this system can potentially save lives and improve overall the
+            better health within the Rwandan population.
+          </p>
+          <p>Together we can make it!!!</p>
+        </div>
+      </div>
+      <div class="col-lg-10 mt-5">
+        <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-4 wow zoomIn">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="{%static 'img/person/avatar.png'%}" alt="">
+                <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div>
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0">Dr. Merabu</p>
+                <span class="text-sm text-grey">Cardiology</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 wow zoomIn">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="{%static 'img/person/avatar.png'%}" alt="">
+                <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div>
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0">Dr. Alexa Melvin</p>
+                <span class="text-sm text-grey">Dental</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 wow zoomIn">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="{%static 'img/person/avatar.png'%}" alt="">
+                <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div>
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
+                <span class="text-sm text-grey">General Health</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
